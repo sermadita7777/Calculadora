@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="12dp">
+
+    <TextView
+        android:id="@+id/tvHistFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/calc_text_history"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/tvHistExpresion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:paddingTop="4dp"
+        android:textColor="@color/calc_text_secondary"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvHistResultado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:paddingTop="2dp"
+        android:textColor="@color/calc_text_primary"
+        android:textSize="26sp"
+        android:fontFamily="sans-serif-light" />
+</LinearLayout>
