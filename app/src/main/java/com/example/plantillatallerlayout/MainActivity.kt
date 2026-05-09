@@ -99,11 +99,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun alPulsarOperador(op: Char) {
         if (calculoFinalizado) {
+            // El resultado se convierte en el primer operando del nuevo cálculo
             calculoFinalizado = false
             tvHistory.text = ""
         }
 
         if (expresion.isEmpty()) {
+            // Permitir iniciar la expresión con un signo negativo
             if (op == '-') {
                 expresion = "-"
                 actualizarPantalla()
@@ -180,6 +182,7 @@ class MainActivity : AppCompatActivity() {
         val ultimo = expresion.last()
         if (!ultimo.isDigit() && ultimo != ')') return
 
+        // Convierte el último número a su porcentaje (n / 100)
         val inicio = ultimoNumeroInicio()
         val ultimoNum = expresion.substring(inicio).toBigDecimalOrNull() ?: return
         val porcentaje = NumberFormatter.formatear(
@@ -188,7 +191,6 @@ class MainActivity : AppCompatActivity() {
         expresion = expresion.substring(0, inicio) + porcentaje
         actualizarPantalla()
     }
-
     private fun alPulsarCambioSigno() {
         if (calculoFinalizado) {
             if (expresion.isEmpty()) return
@@ -206,14 +208,18 @@ class MainActivity : AppCompatActivity() {
 
         val antes = expresion.substring(0, inicio)
         when {
+            // (-N) → N : desenvuelve si ya estaba en (-N)
             antes.endsWith("(-") && expresion.endsWith(")") ->
                 expresion = antes.removeSuffix("(-") + numero.removeSuffix(")")
             antes.endsWith("(-") ->
                 expresion = antes.removeSuffix("(-") + numero
+            // -N (al inicio de la expresión) → N
             antes == "-" ->
                 expresion = numero
+            // N solo → -N
             antes.isEmpty() ->
                 expresion = "-$numero"
+            // N tras operador o paréntesis → envolver en (-N)
             else ->
                 expresion = "$antes(-$numero)"
         }
@@ -243,6 +249,7 @@ class MainActivity : AppCompatActivity() {
     private fun alPulsarIgual() {
         if (expresion.isEmpty() || calculoFinalizado) return
 
+        // Auto-cierre de paréntesis pendientes
         val pendientes = expresion.count { it == '(' } - expresion.count { it == ')' }
         if (pendientes > 0) {
             val ult = expresion.lastOrNull()
@@ -304,6 +311,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun insertarDesdeHistorial(valor: String) {
+       // Selección de historial como punto de partida
         if (calculoFinalizado) {
             expresion = valor
             calculoFinalizado = false

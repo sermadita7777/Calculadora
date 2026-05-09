@@ -15,6 +15,7 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
+    <!-- Estilos de botón calculadora -->
     <style name="CalcButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
